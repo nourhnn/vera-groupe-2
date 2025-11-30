@@ -1,0 +1,126 @@
+<div class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100">
+
+  <!-- HEADER -->
+  <header class="border-b border-zinc-800 px-4 py-3 flex items-center gap-2">
+    <div class="h-8 w-8 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-sm">
+      V
+    </div>
+    <div>
+      <h1 class="text-sm font-semibold">Vera Chat</h1>
+      <p class="text-xs text-zinc-400">Pose ta question, on s’occupe du fact-check</p>
+    </div>
+  </header>
+
+  <!-- MESSAGES -->
+  <main class="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+
+    <ng-container *ngFor="let msg of messages">
+
+      <!-- Message utilisateur ou Vera -->
+      <div *ngIf="msg.from !== 'tweets'"
+           [ngClass]="{
+             'self-end bg-zinc-800 text-zinc-100': msg.from === 'user',
+             'self-start bg-zinc-900 text-zinc-200 border border-zinc-700': msg.from === 'vera'
+           }"
+           class="max-w-[75%] px-3 py-2 rounded-lg text-sm">
+        {{ msg.text }}
+      </div>
+
+      <!-- TWEETS -->
+      <div *ngIf="msg.from === 'tweets'" class="flex flex-col gap-3">
+
+        <div *ngFor="let t of msg.tweets"
+             class="bg-zinc-900 border border-zinc-700 rounded-xl p-4 w-full max-w-md shadow-lg">
+
+          <!-- Header tweet -->
+          <div class="flex items-center gap-3 mb-2">
+            <img [src]="t.avatar" class="w-10 h-10 rounded-full" />
+            <div class="flex flex-col">
+              <span class="font-semibold text-zinc-100">{{ t.author }}</span>
+              <span class="text-xs text-zinc-400">{{ t.timestamp }}</span>
+            </div>
+          </div>
+
+          <!-- Tweet content -->
+          <p class="text-zinc-200 text-sm whitespace-pre-wrap">
+            {{ t.content }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+
+    <!-- LOADER UX MULTI-ÉTAPES -->
+    <div *ngIf="isLoading" class="text-xs text-zinc-300 mt-2">
+
+      <!-- Petite bulle animée -->
+      <div class="flex items-center gap-2 mb-3">
+        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-zinc-800">
+          <span class="h-2 w-2 rounded-full bg-zinc-100 animate-ping"></span>
+        </span>
+        <span>Vera travaille sur ta question…</span>
+      </div>
+
+      <!-- Étapes --> 
+      <div class="flex flex-col gap-2 ml-7">
+
+        <div
+          *ngFor="let step of loadingSteps; let i = index"
+          class="flex items-center gap-3"
+        >
+          <!-- Barre -->
+          <div
+            class="h-1.5 w-24 rounded-full transition-all duration-500"
+            [ngClass]="{
+              'bg-zinc-700': i > currentLoadingStep,
+              'bg-zinc-100': i <= currentLoadingStep
+            }"
+          ></div>
+
+          <!-- Label -->
+          <span
+            class="text-[11px] tracking-wide"
+            [ngClass]="{
+              'text-zinc-500': i > currentLoadingStep,
+              'text-zinc-100 font-medium': i <= currentLoadingStep
+            }"
+          >
+            {{ step.label }}
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ERREUR -->
+    <div *ngIf="error" class="text-xs text-red-400 mt-2">
+      {{ error }}
+    </div>
+
+  </main>
+
+  <!-- FOOTER INPUT -->
+  <footer class="border-t border-zinc-800 p-3">
+    <form class="flex items-center gap-2" (ngSubmit)="sendMessage()">
+      <input
+        [(ngModel)]="userInput"
+        name="message"
+        type="text"
+        placeholder="Écris ta question ici..."
+        class="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-700"
+      />
+
+      <button
+        type="submit"
+        class="px-3 py-2 rounded-lg bg-zinc-100 text-zinc-900 text-sm font-medium hover:bg-zinc-200 disabled:opacity-50"
+        [disabled]="isLoading"
+      >
+        Envoyer
+      </button>
+    </form>
+  </footer>
+
+</div>
