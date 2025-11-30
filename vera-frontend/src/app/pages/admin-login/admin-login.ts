@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { VeraApiService } from '../../services/vera-api.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -12,29 +12,32 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './admin-login.css',
 })
 export class AdminLoginComponent {
-  email: string = '';
-  password: string = '';
+  email = '';
+  password = '';
   error: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private veraApi: VeraApiService, private router: Router) {}
 
-  login() {
+  onSubmit() {
     this.error = null;
+    console.log('[AdminLogin] submit avec :', this.email, this.password);
 
-    this.http
-      .post('http://localhost:3000/api/admin/login', {
-        email: this.email,
-        password: this.password,
-      })
-      .subscribe({
-        next: (res: any) => {
-          localStorage.setItem('vera_admin_token', res.token);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => {
-          console.error(err);
-          this.error = err.error?.message || 'Identifiants incorrects.';
-        },
-      });
+    this.veraApi.loginAdmin(this.email, this.password).subscribe({
+      next: (res) => {
+        console.log('[AdminLogin] succès API', res);
+        localStorage.setItem('vera_admin_token', res.token);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error('[AdminLogin] erreur API', err);
+        if (err.status === 400) {
+          this.error = 'Merci de remplir les deux champs.';
+        } else if (err.status === 401) {
+          this.error = 'Identifiants incorrects.';
+        } else {
+          this.error = 'Erreur serveur, réessaie plus tard.';
+        }
+      },
+    });
   }
 }

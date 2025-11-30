@@ -3,47 +3,52 @@ const cors = require('cors');
 
 const app = express();
 
-// Middlewares
+// 🔧 Middlewares
 app.use(cors());
 app.use(express.json());
 
 // "Base de données" en mémoire pour la démo
 const questionsHistory = [];
-let adminAccount = null;
+
+// 🔐 Admin fixe pour le projet
+const ADMIN_EMAIL = 'admin';    // tu peux garder le label "Email" dans le form
+const ADMIN_PASS = 'vera123';
 
 /**
  * Fonction très simple de fact-check.
- * Tu pourras l'améliorer plus tard si tu veux.
  */
 function checkFact(question) {
   const lower = question.toLowerCase().trim();
 
-  // Exemples de règles débiles mais fun pour la démo :
   if (lower.includes('terre est plate')) {
     return {
       isTrue: false,
-      reason: "Le consensus scientifique et les observations montrent que la Terre est (globalement) sphérique."
+      reason:
+        'Le consensus scientifique et les observations montrent que la Terre est (globalement) sphérique.',
     };
   }
 
   if (lower.includes('trump est mort')) {
     return {
       isTrue: false,
-      reason: "À la date d'aujourd'hui, aucune source fiable ne confirme la mort de Donald Trump."
+      reason:
+        "À la date d'aujourd'hui, aucune source fiable ne confirme la mort de Donald Trump.",
     };
   }
 
   if (lower.includes('eau bout à 100') || lower.includes('eau bout a 100')) {
     return {
       isTrue: true,
-      reason: "À pression atmosphérique normale, l'eau bout à environ 100°C."
+      reason:
+        "À pression atmosphérique normale, l'eau bout à environ 100°C.",
     };
   }
 
-  // Par défaut : on considère que c'est "vrai" mais avec une raison générique
+  // Par défaut
   return {
     isTrue: true,
-    reason: "Aucune contradiction évidente détectée avec les règles simples actuelles."
+    reason:
+      'Aucune contradiction évidente détectée avec les règles simples actuelles.',
   };
 }
 
@@ -66,7 +71,9 @@ app.post('/api/check', (req, res) => {
   const { question, source } = req.body || {};
 
   if (!question || typeof question !== 'string') {
-    return res.status(400).json({ error: 'Field "question" (string) is required.' });
+    return res
+      .status(400)
+      .json({ error: 'Field "question" (string) is required.' });
   }
 
   const verdict = checkFact(question);
@@ -95,47 +102,29 @@ app.post('/api/check', (req, res) => {
  * Endpoint pour le dashboard: liste des questions
  */
 app.get('/api/questions', (req, res) => {
-  // on renvoie du plus récent au plus ancien
-  const ordered = [...questionsHistory].reverse();
+  const ordered = [...questionsHistory].reverse(); // plus récent en premier
   res.json(ordered);
 });
 
-// Créer un compte admin (une seule fois)
-app.post('/api/admin/register', (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ success: false, message: 'Email et mot de passe requis.' });
-  }
-
-  if (adminAccount) {
-    return res.status(400).json({
-      success: false,
-      message: 'Un compte admin existe déjà. Vous pouvez vous connecter.',
-    });
-  }
-
-  adminAccount = { email, password };
-  console.log('Admin créé :', adminAccount.email);
-
-  return res.json({
-    success: true,
-    message: 'Compte admin créé avec succès.',
-  });
-});
-
-// Connexion admin
+/**
+ * Connexion admin (identifiants fixes)
+ * Body attendu: { email: string, password: string }
+ */
 app.post('/api/admin/login', (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body || {};
 
-  if (!adminAccount) {
+  console.log('[API] /api/admin/login body =', req.body);
+
+  // Champs manquants → 400
+  if (!email || !password) {
     return res.status(400).json({
       success: false,
-      message: "Aucun compte admin n'existe encore. Créez-le d'abord.",
+      message: 'Email et mot de passe requis.',
     });
   }
 
-  if (email === adminAccount.email && password === adminAccount.password) {
+  // Bons identifiants
+  if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
     return res.json({
       success: true,
       token: 'VeraSuperAdminToken123',
@@ -143,15 +132,15 @@ app.post('/api/admin/login', (req, res) => {
     });
   }
 
+  // Mauvais identifiants → 401
   return res.status(401).json({
     success: false,
     message: 'Identifiants incorrects.',
   });
 });
 
-
 /**
- * Endpoint de healthcheck (optionnel mais pratique)
+ * Endpoint de healthcheck
  */
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', count: questionsHistory.length });
@@ -162,5 +151,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Vera API running on port ${PORT}`);
 });
-
-

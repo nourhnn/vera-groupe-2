@@ -13,25 +13,42 @@ export interface VeraCheckResult {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VeraApiService {
-
   private baseUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
-  // Pour le chat classique
+  // 🔹 Chat classique
   ask(question: string): Observable<VeraCheckResult> {
     return this.checkQuestion(question, 'chat');
   }
 
-  // Méthode générique
-  checkQuestion(question: string, source: string = 'chat'): Observable<VeraCheckResult> {
-    return this.http.post<VeraCheckResult>(`${this.baseUrl}/api/check`, { question, source });
+  // 🔹 Méthode générique de check
+  checkQuestion(
+    question: string,
+    source: string = 'chat'
+  ): Observable<VeraCheckResult> {
+    return this.http.post<VeraCheckResult>(`${this.baseUrl}/api/check`, {
+      question,
+      source,
+    });
   }
 
+  // 🔹 Historique des questions
   getQuestions(): Observable<VeraCheckResult[]> {
     return this.http.get<VeraCheckResult[]>(`${this.baseUrl}/api/questions`);
+  }
+
+  // 🔹 Login admin
+  loginAdmin(
+    email: string,
+    password: string
+  ): Observable<{ success: boolean; token: string }> {
+    return this.http.post<{ success: boolean; token: string }>(
+      `${this.baseUrl}/api/admin/login`,
+      { email, password }
+    );
   }
 }
