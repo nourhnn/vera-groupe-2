@@ -36,6 +36,7 @@ import { Routes } from '@angular/router';
 import { ChatComponent } from './pages/chat/chat';
 import { DashboardComponent } from './pages/dashboard/dashboard';
 import { AdminLoginComponent } from './pages/admin-login/admin-login';
+import { LandingComponent } from './pages/landing/landing'; 
 
 export const routes: Routes = [
   {
@@ -47,6 +48,11 @@ export const routes: Routes = [
     path: 'chat',
     component: ChatComponent,
   },
+  {
+    path: 'landing',
+    component: LandingComponent,
+  },
+
   {
     path: 'dashboard',
     component: DashboardComponent,

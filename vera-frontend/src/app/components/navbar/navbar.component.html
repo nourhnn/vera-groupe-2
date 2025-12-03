@@ -1,0 +1,87 @@
+<!-- NAVBAR CONTAINER -->
+<nav class="w-full bg-[#F5ECDE] px-10 md:px-20 py-4 pt-10 flex items-center justify-between">
+
+  <!-- LOGO -->
+  <img src="assets/images/logo-vera.png" class="h-7" />
+
+  <!-- DESKTOP MENU -->
+  <div class="hidden md:flex items-center gap-10 text-[15px] text-black">
+
+    <a href="#" class="hover:underline">Comment ça marche ?</a>
+    <a href="#" class="hover:underline">Rencontrez l’équipe</a>
+    <a href="#" class="hover:underline">FAQ</a>
+
+    <!-- BOUTON PARLER À VERA -->
+    <button class="bg-black text-white px-6 py-2 rounded-full text-[15px]">
+      Parler à Vera
+    </button>
+
+    <!-- LANG SWITCH -->
+    <div class="flex items-center gap-2 text-[14px] tracking-wide">
+      <span>FR</span>
+      <span class="opacity-50">/</span>
+      <span>ENG</span>
+    </div>
+  </div>
+
+  <!-- BURGER (MOBILE ONLY) -->
+  <button
+    (click)="toggleMenu()"
+    class="md:hidden text-5xl font-light"
+  >
+    ☰
+  </button>
+</nav>
+
+
+
+<!-- MOBILE OVERLAY MENU -->
+<div
+  *ngIf="menuOpen()"
+  class="fixed inset-0 w-full h-[70%] bg-[#F5ECDE] z-50 px-6 pt-6 overflow-y-auto"
+>
+
+  <!-- HEADER MOBILE : LOGO + CROIX ALIGNÉS -->
+  <div class="flex items-center justify-between">
+    <img src="assets/images/logo-vera.png" class="h-7 mt-1" />
+
+    <button
+      (click)="closeMenu()"
+      class="text-4xl font-light leading-none"
+    >
+      ✕
+    </button>
+  </div>
+
+  <!-- 🌍 LANG SWITCH MOBILE (centré comme sur ta photo) -->
+  <div class="mt-6 flex justify-center gap-3 text-[15px] tracking-wide items-center">
+    <span class="font-medium border-b border-black pb-[2px]">FR</span>
+    <span class="opacity-50">/</span>
+    <span>ENG</span>
+  </div>
+
+  <!-- MENU CONTENT -->
+  <div class="mt-10 flex flex-col items-center gap-8 text-lg">
+    <a (click)="closeMenu()" class="hover:underline">Comment ça marche ?</a>
+    <a (click)="closeMenu()" class="hover:underline">Rencontrez l’équipe</a>
+    <a (click)="closeMenu()" class="hover:underline">FAQ</a>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="mt-12 flex flex-col items-center gap-5 pb-20">
+
+    <button class="w-64 py-3 bg-black text-white rounded-full">
+      Appeler Vera
+    </button>
+
+    <button class="w-64 py-3 bg-black text-white rounded-full">
+      Parler sur Instagram
+    </button>
+
+    <button class="w-64 py-3 bg-black text-white rounded-full">
+      Parler sur WhatsApp
+    </button>
+
+  </div>
+
+</div>
