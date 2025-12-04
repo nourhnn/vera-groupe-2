@@ -1,0 +1,126 @@
+.privacy {
+  padding: 7rem 5%;
+  background: #f4ebdc;
+  color: #000000;
+  font-family: 'Montserrat', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.privacy h1 {
+  font-family: 'Lastik', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 58px;
+  margin-top: 21px;
+  margin-bottom: 40px;
+  line-height: 1.05;
+}
+
+.privacy h2 {
+  font-family: 'Lastik', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 45px;
+  margin: 48px 0 20px;
+  line-height: 1.12;
+}
+
+.privacy h3 {
+  font-family: 'Lastik', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 21px 0 14px;
+}
+
+.privacy p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 15px;
+}
+
+.privacy p strong {
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.privacy .update-date {
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  margin: 0 0 10px;
+}
+
+.privacy a {
+  color: #000000;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.privacy ul {
+  padding-left: 1.2rem;
+  margin: 0 0 15px;
+  font-size: 16px;
+  line-height: 1.7;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.privacy ul li + li {
+  margin-top: 8px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.privacy table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  background-color: transparent;
+  border: 1px solid #000000;
+}
+
+.privacy th,
+.privacy td {
+  text-align: left;
+  padding: 14px 12px;
+  border: 1px solid #000000;
+  vertical-align: top;
+}
+
+.privacy th {
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.02);
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+}
+
+.privacy td.duration {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.privacy td.purpose {
+  vertical-align: top;
+}
+
+@media (max-width: 1024px) {
+  .privacy h2 {
+    margin-top: 38px;
+  }
+}
+
+@media (max-width: 767px) {
+  .privacy {
+    padding: 4rem 5%;
+  }
+
+  .privacy h1 {
+    font-size: 38px;
+  }
+
+  .privacy p,
+  .privacy ul {
+    font-size: 17px;
+  }
+
+  .privacy table {
+    font-size: 15px;
+  }
+}

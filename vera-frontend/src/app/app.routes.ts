@@ -55,4 +55,21 @@ export const routes: Routes = [
     path: 'admin-login',
     component: AdminLoginComponent,
   },
+  {
+    path: 'politique-confidentialite',
+    loadComponent: () =>
+      import('./pages/privacy-policy/privacy-policy').then((c) => c.PrivacyPolicyComponent),
+  },
+  {
+    path: 'cgu',
+    loadComponent: () => import('./pages/cgu/cgu').then((c) => c.CguComponent),
+  },
+  {
+    path: '404',
+    loadComponent: () => import('./pages/not-found/not-found').then((c) => c.NotFoundComponent),
+  },
+  {
+    path: '**',
+    redirectTo: '404',
+  },
 ];

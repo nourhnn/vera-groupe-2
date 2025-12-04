@@ -1,47 +1,60 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
-      <h2 class="text-2xl font-bold mb-2 text-center">Connexion Admin</h2>
-      <p class="text-xs text-gray-500 text-center mb-4">
-        Connecte-toi pour accéder au dashboard.
-      </p>
-  
-      <div *ngIf="error" class="mb-3 text-red-600 text-sm">
-        {{ error }}
-      </div>
-  
-      <form (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
-        <div>
-          <label class="block text-sm mb-1">Email</label>
-          <input
-            type="text"
-            class="w-full border rounded px-3 py-2"
-            [(ngModel)]="email"
-            name="email"
-            required
-          />
-        </div>
-      
-        <div>
-          <label class="block text-sm mb-1">Mot de passe</label>
-          <input
-            type="password"
-            class="w-full border rounded px-3 py-2"
-            [(ngModel)]="password"
-            name="password"
-            required
-          />
-        </div>
-      
-        <button
-          type="submit"
-          class="w-full py-2 rounded bg-black text-white mt-2"
-        >
-          Se connecter
-        </button>
-      
-        <p *ngIf="error" class="text-red-500 text-sm mt-2">{{ error }}</p>
-      </form>
-      
+<section class="login">
+  <div class="card">
+    <div class="card-header">
+      <p class="eyebrow">Accès administrateur</p>
+      <h1>Connexion</h1>
     </div>
+
+    <form class="form" autocomplete="off" (ngSubmit)="onSubmit()">
+      <div *ngIf="error" class="error">{{ error }}</div>
+
+      <label class="field">
+        <span>Adresse mail</span>
+        <input
+          type="text"
+          name="email"
+          placeholder="admin"
+          [(ngModel)]="email"
+          required
+        />
+      </label>
+
+      <label class="field password-field">
+        <span>Mot de passe</span>
+        <div class="password-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            required
+          />
+          <button
+            type="button"
+            class="toggle"
+            (click)="togglePassword()"
+            [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+          >
+            <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4.5-7 11-7 11 7 11 7-4.5 7-11 7-11-7-11-7Z" />
+              <circle cx="12" cy="12" r="3.5" />
+            </svg>
+            <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3l18 18" />
+              <path d="M10.5 10.5a3 3 0 0 0 3.9 3.9" />
+              <path d="M9.88 4.13A10.35 10.35 0 0 1 12 4c6.5 0 11 8 11 8a18.5 18.5 0 0 1-3.21 4.24" />
+              <path d="M6.18 6.18A18.5 18.5 0 0 0 1 12s4.5 8 11 8a10.6 10.6 0 0 0 3.39-.56" />
+            </svg>
+          </button>
+        </div>
+      </label>
+
+      <button type="submit" class="submit">Se connecter</button>
+
+      <div class="links">
+        <a routerLink="/cgu">Mentions légales &amp; CGU</a>
+        <a routerLink="/politique-confidentialite">Politique de confidentialité</a>
+      </div>
+    </form>
   </div>
-  
+</section>
