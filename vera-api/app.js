@@ -1,10 +1,12 @@
-// app.js
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
+// app.js (version ES MODULES)
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
+import cors from "cors";
 
 // Routes stats (Sandra)
-const statsRoutes = require('./routes/statsRoutes');
+import statsRoutes from "./routes/statsRoutes.js";
 
 const app = express();
 
@@ -16,8 +18,8 @@ app.use(express.json());
 const questionsHistory = [];
 
 // 🔐 Admin fixe pour le projet
-const ADMIN_EMAIL = 'admin'; // tu peux garder le label "Email" dans le form
-const ADMIN_PASS = 'vera123';
+const ADMIN_EMAIL = "admin"; 
+const ADMIN_PASS = "vera123";
 
 /**
  * Fonction très simple de fact-check.
@@ -25,27 +27,26 @@ const ADMIN_PASS = 'vera123';
 function checkFact(question) {
   const lower = question.toLowerCase().trim();
 
-  if (lower.includes('terre est plate')) {
+  if (lower.includes("terre est plate")) {
     return {
       isTrue: false,
       reason:
-        'Le consensus scientifique et les observations montrent que la Terre est (globalement) sphérique.',
+        "Le consensus scientifique et les observations montrent que la Terre est (globalement) sphérique.",
     };
   }
 
-  if (lower.includes('trump est mort')) {
+  if (lower.includes("trump est mort")) {
     return {
       isTrue: false,
       reason:
-        "À la date d'aujourd'hui, aucune source fiable ne confirme la mort de Donald Trump.",
+        "Aucune source fiable ne confirme la mort de Donald Trump.",
     };
   }
 
-  if (lower.includes('eau bout à 100') || lower.includes('eau bout a 100')) {
+  if (lower.includes("eau bout à 100") || lower.includes("eau bout a 100")) {
     return {
       isTrue: true,
-      reason:
-        "À pression atmosphérique normale, l'eau bout à environ 100°C.",
+      reason: "À pression atmosphérique normale, l'eau bout à environ 100°C.",
     };
   }
 
@@ -53,7 +54,7 @@ function checkFact(question) {
   return {
     isTrue: true,
     reason:
-      'Aucune contradiction évidente détectée avec les règles simples actuelles.',
+      "Aucune contradiction évidente détectée avec les règles simples actuelles.",
   };
 }
 
@@ -70,28 +71,24 @@ function generateMockTweets(question) {
 
 /**
  * Endpoint principal: fact-check d'une question.
- * Body attendu: { question: string, source?: 'chat' | 'tiktok' | 'telegram' | ... }
+ * Body attendu: { question: string }
  */
-app.post('/api/check', (req, res) => {
+app.post("/api/check", (req, res) => {
   const { question, source } = req.body || {};
 
-  if (!question || typeof question !== 'string') {
+  if (!question || typeof question !== "string") {
     return res
       .status(400)
       .json({ error: 'Field "question" (string) is required.' });
   }
 
   const verdict = checkFact(question);
-  let tweets = [];
-
-  if (!verdict.isTrue) {
-    tweets = generateMockTweets(question);
-  }
+  let tweets = verdict.isTrue ? [] : generateMockTweets(question);
 
   const record = {
     id: questionsHistory.length + 1,
     question,
-    source: source || 'chat',
+    source: source || "chat",
     isTrue: verdict.isTrue,
     reason: verdict.reason,
     tweets,
@@ -106,52 +103,49 @@ app.post('/api/check', (req, res) => {
 /**
  * Endpoint pour le dashboard: liste des questions
  */
-app.get('/api/questions', (_req, res) => {
+app.get("/api/questions", (_req, res) => {
   const ordered = [...questionsHistory].reverse(); // plus récent en premier
   res.json(ordered);
 });
 
 /**
- * Connexion admin (identifiants fixes)
- * Body attendu: { email: string, password: string }
+ * Connexion admin
  */
-app.post('/api/admin/login', (req, res) => {
+app.post("/api/admin/login", (req, res) => {
   const { email, password } = req.body || {};
 
-  console.log('[API] /api/admin/login body =', req.body);
+  console.log("[API] /api/admin/login body =", req.body);
 
-  // Champs manquants → 400
   if (!email || !password) {
     return res.status(400).json({
       success: false,
-      message: 'Email et mot de passe requis.',
+      message: "Email et mot de passe requis.",
     });
   }
 
-  // Bons identifiants
   if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
     return res.json({
       success: true,
-      token: 'VeraSuperAdminToken123',
-      message: 'Connexion réussie.',
+      token: "VeraSuperAdminToken123",
+      message: "Connexion réussie.",
     });
   }
 
-  // Mauvais identifiants → 401
   return res.status(401).json({
     success: false,
-    message: 'Identifiants incorrects.',
+    message: "Identifiants incorrects.",
   });
 });
 
 /**
  * Endpoint de healthcheck
  */
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', count: questionsHistory.length });
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok", count: questionsHistory.length });
 });
 
-// 👉 ICI : on branche les routes de stats de Sandra
-app.use('/api/stats', statsRoutes);
+// 👉 Brancher les routes stats
+app.use("/api/stats", statsRoutes);
 
-module.exports = app;
+// Export ES module
+export default app;

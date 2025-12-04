@@ -1,11 +1,11 @@
-const express = require('express');
-const { supabase } = require('../database/supabaseClient');
-const { getOverview } = require('../services/statsService');
+import express from "express";
+import { supabase } from "../database/supabaseClient.js";
+import { getOverview } from "../services/statsService.js";
 
 const router = express.Router();
 
 if (!supabase) {
-  console.warn('Supabase client not configured; stats routes will return 500.');
+  console.warn("Supabase client not configured; stats routes will return 500.");
 }
 
 const sseClients = new Set();
@@ -26,7 +26,7 @@ async function refreshSnapshot() {
     lastSnapshot = snapshot;
     broadcast(snapshot);
   } catch (err) {
-    console.error('Failed to refresh stats snapshot:', err.message);
+    console.error("Failed to refresh stats snapshot:", err.message);
   }
 }
 
@@ -41,30 +41,36 @@ function scheduleRefresh(delayMs = 400) {
 function initRealtimeChannel() {
   if (channelInitialized || !supabase) return;
 
-  const channel = supabase.channel('reponses_sondage_changes');
+  const channel = supabase.channel("reponses_sondage_changes");
 
   channel.on(
-    'postgres_changes',
-    { event: '*', schema: 'public', table: 'reponses_sondage' },
-    () => scheduleRefresh(),
+    "postgres_changes",
+    { event: "*", schema: "public", table: "reponses_sondage" },
+    () => scheduleRefresh()
   );
 
   channel.subscribe((status) => {
-    if (status === 'SUBSCRIBED') {
+    if (status === "SUBSCRIBED") {
       channelInitialized = true;
-      console.log('Realtime subscription active for reponses_sondage.');
+      console.log("Realtime subscription active for reponses_sondage.");
     }
-    if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
+    if (
+      status === "CHANNEL_ERROR" ||
+      status === "TIMED_OUT" ||
+      status === "CLOSED"
+    ) {
       channelInitialized = false;
-      console.error('Realtime channel error, attempting to resubscribe...');
+      console.error("Realtime channel error, attempting to resubscribe...");
       setTimeout(initRealtimeChannel, 1000);
     }
   });
 }
 
-router.get('/overview', async (_req, res) => {
+router.get("/overview", async (_req, res) => {
   if (!supabase) {
-    return res.status(500).json({ error: 'Supabase client not configured.' });
+    return res
+      .status(500)
+      .json({ error: "Supabase client not configured." });
   }
 
   try {
@@ -72,18 +78,22 @@ router.get('/overview', async (_req, res) => {
     lastSnapshot = overview;
     return res.status(200).json(overview);
   } catch (err) {
-    return res.status(500).json({ error: err.message || 'Failed to compute stats.' });
+    return res
+      .status(500)
+      .json({ error: err.message || "Failed to compute stats." });
   }
 });
 
-router.get('/stream', async (req, res) => {
+router.get("/stream", async (req, res) => {
   if (!supabase) {
-    return res.status(500).json({ error: 'Supabase client not configured.' });
+    return res
+      .status(500)
+      .json({ error: "Supabase client not configured." });
   }
 
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
   res.flushHeaders?.();
 
   sseClients.add(res);
@@ -96,10 +106,10 @@ router.get('/stream', async (req, res) => {
 
   initRealtimeChannel();
 
-  req.on('close', () => {
+  req.on("close", () => {
     sseClients.delete(res);
     res.end();
   });
 });
 
-module.exports = router;
+export default router;
