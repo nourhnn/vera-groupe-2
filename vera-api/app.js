@@ -10,20 +10,46 @@ import statsRoutes from "./routes/statsRoutes.js";
 
 const app = express();
 
-// 🔧 Middlewares
-app.use(cors());
+/* -----------------------------------------------------
+   🔧 CORS CONFIG (IMPORTANT POUR FRONT + VERCEL + RENDER)
+------------------------------------------------------ */
+const allowedOrigins = [
+  "http://localhost:4200",                // Angular local
+  "https://vera-groupe-2.vercel.app",     // ⚠️ ton front Vercel
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Autoriser les outils sans origin (Postman / axios server-side)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("❌ Origine NON AUTORISÉE :", origin);
+      return callback(new Error("CORS not allowed"));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.json());
 
-// "Base de données" en mémoire pour la démo (tes questions)
+/* -----------------------------------------------------
+   🔧 BASE DE DONNÉES EN MÉMOIRE
+------------------------------------------------------ */
 const questionsHistory = [];
 
-// 🔐 Admin fixe pour le projet
-const ADMIN_EMAIL = "admin"; 
+// 🔐 Admin fixe
+const ADMIN_EMAIL = "admin";
 const ADMIN_PASS = "vera123";
 
-/**
- * Fonction très simple de fact-check.
- */
+/* -----------------------------------------------------
+   FONCTIONS
+------------------------------------------------------ */
 function checkFact(question) {
   const lower = question.toLowerCase().trim();
 
@@ -50,7 +76,6 @@ function checkFact(question) {
     };
   }
 
-  // Par défaut
   return {
     isTrue: true,
     reason:
@@ -58,9 +83,6 @@ function checkFact(question) {
   };
 }
 
-/**
- * Génère des tweets moqueurs si l'info est fausse.
- */
 function generateMockTweets(question) {
   return [
     `😅 On est encore en 2025 et quelqu'un demande: "${question}"...`,
@@ -69,10 +91,9 @@ function generateMockTweets(question) {
   ];
 }
 
-/**
- * Endpoint principal: fact-check d'une question.
- * Body attendu: { question: string }
- */
+/* -----------------------------------------------------
+   ENDPOINT PRINCIPAL
+------------------------------------------------------ */
 app.post("/api/check", (req, res) => {
   const { question, source } = req.body || {};
 
@@ -100,21 +121,19 @@ app.post("/api/check", (req, res) => {
   return res.json(record);
 });
 
-/**
- * Endpoint pour le dashboard: liste des questions
- */
+/* -----------------------------------------------------
+   ENDPOINT DASHBOARD
+------------------------------------------------------ */
 app.get("/api/questions", (_req, res) => {
-  const ordered = [...questionsHistory].reverse(); // plus récent en premier
+  const ordered = [...questionsHistory].reverse();
   res.json(ordered);
 });
 
-/**
- * Connexion admin
- */
+/* -----------------------------------------------------
+   LOGIN ADMIN
+------------------------------------------------------ */
 app.post("/api/admin/login", (req, res) => {
   const { email, password } = req.body || {};
-
-  console.log("[API] /api/admin/login body =", req.body);
 
   if (!email || !password) {
     return res.status(400).json({
@@ -137,15 +156,20 @@ app.post("/api/admin/login", (req, res) => {
   });
 });
 
-/**
- * Endpoint de healthcheck
- */
+/* -----------------------------------------------------
+   HEALTHCHECK
+------------------------------------------------------ */
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", count: questionsHistory.length });
 });
 
-// 👉 Brancher les routes stats
+/* -----------------------------------------------------
+   ROUTES STATS
+------------------------------------------------------ */
 app.use("/api/stats", statsRoutes);
 
-// Export ES module
+/* -----------------------------------------------------
+   EXPORT
+------------------------------------------------------ */
 export default app;
+

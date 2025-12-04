@@ -41,7 +41,7 @@ import { LandingComponent } from './pages/landing/landing';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'chat',
+    redirectTo: 'landing',
     pathMatch: 'full',
   },
   {
