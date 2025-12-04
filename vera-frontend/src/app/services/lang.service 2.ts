@@ -5,13 +5,11 @@ import { Injectable, signal } from '@angular/core';
 })
 export class LangService {
 
+  // Langue actuelle
   private lang = signal<'fr' | 'en'>('fr');
 
-  // -------------------------------------------------------
-  // 🇫🇷 FRANÇAIS
-  // -------------------------------------------------------
+  // 🇫🇷 Dictionnaire FR
   private fr = {
-
     comment: {
       howItWorks: "Comment ça marche ?",
       askQuestion: "Posez une question",
@@ -56,50 +54,22 @@ export class LangService {
       com: "COM",
       ai: "AI",
       journalist: "JOURNALIST"
-    },
+        },
+        experts: {
+    our: "Notre",
+    expertCommittee: "comité d’experts",
+    helpEvaluate: "Nous aide à évaluer la pertinence des réponses de Vera et à mesurer son impact",
 
-    experts: {
-      our: "Notre",
-      expertCommittee: "comité d’experts",
-      helpEvaluate:
-        "Nous aide à évaluer la pertinence des réponses de Vera et à mesurer son impact",
-
-      aude: "Fondatrice Fakeoff Présidente<br>CitizenFacts",
-      rudy: "Fondateur Conspiracy Watch",
-      camille: "Professeure à Columbia<br>University School",
-      valdez: "Rédac. chef Africa Check FR",
-      benjamin: "Medialab de Sciences-Po"
-    },
-
-    // -------------------------------------------------------
-    // 🇫🇷 FACT-CHECKING SECTION
-    // -------------------------------------------------------
-    fact: {
-      title1: "Vera est connectée en",
-      title2: "temps réel",
-      title3: "sites de fact-checking",
-
-      card1_title: "150+ sites de fact-checking",
-      card1_sub: "Pour la vérification de faits",
-      card1_point1: "Signataires des chartes européennes IFCN et EFCSN",
-      card1_point2: "Agences de presses spécialisées en fact-checking",
-
-      card2_title: "250+ médias fiables et reconnus",
-      card2_sub: "Pour connaître l'actualité",
-      card2_point1: "Tous les bords politiques",
-      card2_point2: "Réputés comme fiables et sérieux",
-
-      showSources: "Voir la liste des sources"
+    aude: "Fondatrice Fakeoff Présidente<br>CitizenFacts",
+    rudy: "Fondateur Conspiracy Watch",
+    camille: "Professeure à Columbia<br>University School",
+    valdez: "Rédac. chef Africa Check FR",
+    benjamin: "Medialab de Sciences-Po"
     }
   };
 
-
-
-  // -------------------------------------------------------
-  // 🇬🇧 ENGLISH
-  // -------------------------------------------------------
+  // 🇬🇧 Dictionnaire EN
   private en = {
-
     comment: {
       howItWorks: "How does it work?",
       askQuestion: "Ask a question",
@@ -145,46 +115,21 @@ export class LangService {
       ai: "AI",
       journalist: "JOURNALIST"
     },
-
     experts: {
-      our: "Our",
-      expertCommittee: "expert committee",
-      helpEvaluate:
-        "Helps us evaluate the relevance of Vera’s answers and measure its impact",
+  our: "Our",
+  expertCommittee: "expert committee",
+  helpEvaluate: "Helps us evaluate the relevance of Vera’s answers and measure its impact",
 
-      aude: "Founder of Fakeoff / President of CitizenFacts",
-      rudy: "Founder of Conspiracy Watch",
-      camille: "Professor at Columbia University School",
-      valdez: "Editor-in-chief Africa Check FR",
-      benjamin: "Sciences-Po Medialab"
-    },
+  aude: "Founder of Fakeoff / President of CitizenFacts",
+  rudy: "Founder of Conspiracy Watch",
+  camille: "Professor at Columbia University School",
+  valdez: "Editor-in-chief Africa Check FR",
+  benjamin: "Sciences-Po Medialab"
+}
 
-    // -------------------------------------------------------
-    // 🇬🇧 FACT-CHECKING SECTION
-    // -------------------------------------------------------
-    fact: {
-      title1: "Vera is connected in",
-      title2: "real-time",
-      title3: "to 400+ fact-checking websites",
-
-      card1_title: "150+ fact-checking websites",
-      card1_sub: "For verifying facts",
-      card1_point1: "Signatories of the European IFCN and EFCSN charters",
-      card1_point2: "Press agencies specialized in fact-checking",
-
-      card2_title: "250+ reliable and recognized media outlets",
-      card2_sub: "To follow the news",
-      card2_point1: "All political viewpoints",
-      card2_point2: "Recognized as reliable and serious",
-
-      showSources: "See the source list"
-    }
   };
 
-
-  // -------------------------------------------------------
-  // METHODS
-  // -------------------------------------------------------
+  // --- Méthodes ---
 
   setLang(lang: 'fr' | 'en') {
     this.lang.set(lang);

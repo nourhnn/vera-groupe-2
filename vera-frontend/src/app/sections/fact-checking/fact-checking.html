@@ -2,47 +2,41 @@
 
   <!-- TITRE -->
   <h2 class="text-center text-black text-[32px] md:text-[42px] font-semibold leading-tight mb-10">
-    Vera est connectée en<br />
-    temps réel
-    <span class="bg-white px-2 rounded">à 400+</span><br />
-    <span class="bg-white px-3 rounded">sites de fact-checking</span>
+    {{ t('fact.title1') }}<br />
+    <span class="bg-white px-2 rounded"> {{ t('fact.title2') }} </span><br />
+    <span class="bg-white px-3 rounded"> {{ t('fact.title3') }} </span>
   </h2>
 
 
-<!-- 🖥 VERSION DESKTOP : 2 lignes compactes -->
-<div class="hidden md:flex flex-col items-center gap-8 mb-16">
+  <!-- 🖥 DESKTOP LOGOS -->
+  <div class="hidden md:flex flex-col items-center gap-8 mb-16">
 
-  <!-- Ligne 1 -->
-  <div class="flex justify-center items-center gap-12">
-    <img src="assets/images/fact_checking/science.png" class="h-10" />
-    <img src="assets/images/fact_checking/snopes.png" class="h-10" />
-    <img src="assets/images/fact_checking/verifica.png" class="h-10" />
-    <img src="assets/images/fact_checking/oeil.png" class="h-12" />
-    <img src="assets/images/fact_checking/cw.png" class="h-12" />
-    <img src="assets/images/fact_checking/afp.png" class="h-10" />
+    <div class="flex justify-center items-center gap-12">
+      <img src="assets/images/fact_checking/science.png" class="h-10" />
+      <img src="assets/images/fact_checking/snopes.png" class="h-10" />
+      <img src="assets/images/fact_checking/verifica.png" class="h-10" />
+      <img src="assets/images/fact_checking/oeil.png" class="h-12" />
+      <img src="assets/images/fact_checking/cw.png" class="h-12" />
+      <img src="assets/images/fact_checking/afp.png" class="h-10" />
+    </div>
+
+    <div class="flex justify-center items-center gap-12">
+      <img src="assets/images/fact_checking/surligners.png" class="h-10" />
+      <img src="assets/images/fact_checking/dw.jpg" class="h-10" />
+      <img src="assets/images/fact_checking/aos.png" class="h-10" />
+      <img src="assets/images/fact_checking/climate.png" class="h-10" />
+      <img src="assets/images/fact_checking/africa.png" class="h-10" />
+      <img src="assets/images/fact_checking/press_trust.png" class="h-10" />
+    </div>
+
   </div>
-
-  <!-- Ligne 2 -->
-  <div class="flex justify-center items-center gap-12">
-    <img src="assets/images/fact_checking/surligners.png" class="h-10" />
-    <img src="assets/images/fact_checking/dw.jpg" class="h-10" />
-    <img src="assets/images/fact_checking/aos.png" class="h-10" />
-    <img src="assets/images/fact_checking/climate.png" class="h-10" />
-    <img src="assets/images/fact_checking/africa.png" class="h-10" />
-    <img src="assets/images/fact_checking/press_trust.png" class="h-10" />
-  </div>
-
-</div>
-
-
-
 
 
   <!-- 📱 MOBILE MARQUEE -->
   <div class="mt-8 overflow-hidden md:hidden mb-16">
     <div class="flex items-center gap-10 animate-marquee">
 
-      <!-- Logos (1ère passe) -->
+      <!-- Logos -->
       <img src="assets/images/fact_checking/science.png" class="h-10" />
       <img src="assets/images/fact_checking/snopes.png" class="h-10" />
       <img src="assets/images/fact_checking/verifica.png" class="h-10" />
@@ -56,7 +50,7 @@
       <img src="assets/images/fact_checking/press_trust.png" class="h-10" />
       <img src="assets/images/fact_checking/afp.png" class="h-10" />
 
-      <!-- 2e passe pour scroll infini -->
+      <!-- 2e passe -->
       <img src="assets/images/fact_checking/science.png" class="h-10" />
       <img src="assets/images/fact_checking/snopes.png" class="h-10" />
       <img src="assets/images/fact_checking/verifica.png" class="h-10" />
@@ -75,96 +69,90 @@
 
 
 
-  <!-- ============================= -->
-  <!-- 🟫 CARTE 1 -->
-  <!-- ============================= -->
-<!-- CARD 1 -->
-<!-- WRAPPER CARDS RESPONSIVE -->
-<div class="flex flex-col md:flex-row md:justify-center md:items-start md:gap-12">
+  <!-- ========================================================= -->
+  <!-- 🔵 CARDS -->
+  <!-- ========================================================= -->
 
-  <!-- CARD 1 -->
-  <div class="relative bg-[#F7F1E6] rounded-2xl p-8 mb-12 border-[3px] border-black 
-              max-w-[550px] md:w-[550px]">
+  <div class="flex flex-col md:flex-row md:justify-center md:items-start md:gap-12">
 
-    <!-- Bordure BLEUE (bas + droite) -->
-    <div class="absolute bottom-[-6px] right-[-6px] w-full h-full rounded-2xl
-                border-[3px] border-[#4BA3F0] -z-10"></div>
 
-    <!-- Fond journal -->
-    <div class="absolute inset-0 rounded-2xl opacity-10"
-         style="background-image: url('assets/images/fact_checking/background.png'); background-size: cover;"></div>
+    <!-- CARD 1 -->
+    <div class="relative bg-[#F7F1E6] rounded-2xl p-8 mb-12 border-[3px] border-black 
+                max-w-[550px] md:w-[550px]">
 
-    <div class="relative">
+      <div class="absolute bottom-[-6px] right-[-6px] w-full h-full rounded-2xl
+                  border-[3px] border-[#4BA3F0] -z-10"></div>
 
-      <h3 class="text-[28px] font-semibold mb-4 text-black">
-        150+ sites de fact-checking
-      </h3>
+      <div class="absolute inset-0 rounded-2xl opacity-10"
+           style="background-image: url('assets/images/fact_checking/background.png'); background-size: cover;"></div>
 
-      <p class="text-[17px] text-gray-900 mb-4">
-        Pour la vérification de faits
-      </p>
+      <div class="relative">
 
-      <ul class="space-y-4 text-[17px]">
-        <li class="flex items-start gap-3">
-          <span class="text-xl">✓</span>
-          Signataires des chartes européennes IFCN et EFCSN
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-xl">✓</span>
-          Agences de presses spécialisées en fact-checking
-        </li>
-      </ul>
+        <h3 class="text-[28px] font-semibold mb-4 text-black">
+          {{ t('fact.card1_title') }}
+        </h3>
 
-      <button class="mt-6 w-full bg-black text-white text-lg py-4 rounded-full">
-        Voir la liste des sources
-      </button>
+        <p class="text-[17px] text-gray-900 mb-4">
+          {{ t('fact.card1_sub') }}
+        </p>
 
+        <ul class="space-y-4 text-[17px]">
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card1_point1') }}
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card1_point2') }}
+          </li>
+        </ul>
+
+        <button class="mt-6 w-full bg-black text-white text-lg py-4 rounded-full">
+          {{ t('fact.showSources') }}
+        </button>
+
+      </div>
     </div>
-  </div>
 
-  <!-- CARD 2 -->
-  <div class="relative bg-[#F7F1E6] rounded-2xl p-8 mb-12 border-[3px] border-black 
-              max-w-[550px] md:w-[550px]">
 
-    <!-- Bordure BLEUE -->
-    <div class="absolute bottom-[-6px] right-[-6px] w-full h-full rounded-2xl
-                border-[3px] border-[#4BA3F0] -z-10"></div>
+    <!-- CARD 2 -->
+    <div class="relative bg-[#F7F1E6] rounded-2xl p-8 mb-12 border-[3px] border-black 
+                max-w-[550px] md:w-[550px]">
 
-    <!-- Fond journal -->
-    <div class="absolute inset-0 rounded-2xl opacity-10"
-         style="background-image: url('assets/images/fact_checking/background.png'); background-size: cover;"></div>
+      <div class="absolute bottom-[-6px] right-[-6px] w-full h-full rounded-2xl
+                  border-[3px] border-[#4BA3F0] -z-10"></div>
 
-    <div class="relative">
+      <div class="absolute inset-0 rounded-2xl opacity-10"
+           style="background-image: url('assets/images/fact_checking/background.png'); background-size: cover;"></div>
 
-      <h3 class="text-[28px] font-semibold mb-4 text-black">
-        250+ médias fiables et reconnus
-      </h3>
+      <div class="relative">
 
-      <p class="text-[17px] text-gray-900 mb-4">
-        Pour connaître l'actualité
-      </p>
+        <h3 class="text-[28px] font-semibold mb-4 text-black">
+          {{ t('fact.card2_title') }}
+        </h3>
 
-      <ul class="space-y-4 text-[17px]">
-        <li class="flex items-start gap-3">
-          <span class="text-xl">✓</span>
-          Tous les bords politiques
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-xl">✓</span>
-          Réputés comme fiables et sérieux
-        </li>
-      </ul>
+        <p class="text-[17px] text-gray-900 mb-4">
+          {{ t('fact.card2_sub') }}
+        </p>
 
-      <button class="mt-6 w-full bg-black text-white text-lg py-4 rounded-full">
-        Voir la liste des sources
-      </button>
+        <ul class="space-y-4 text-[17px]">
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card2_point1') }}
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card2_point2') }}
+          </li>
+        </ul>
 
+        <button class="mt-6 w-full bg-black text-white text-lg py-4 rounded-full">
+          {{ t('fact.showSources') }}
+        </button>
+
+      </div>
     </div>
+
   </div>
-
-</div>
-
-
-
 
 </section>

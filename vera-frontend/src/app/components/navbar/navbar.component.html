@@ -22,7 +22,8 @@
       <!-- FR -->
       <span
         class="cursor-pointer pb-[2px]"
-        [ngClass]="{ 'border-b-2 border-black': lang.currentLang() === 'fr' }"
+        [class.border-b-2]="lang.currentLang() === 'fr'"
+        [class.border-black]="lang.currentLang() === 'fr'"
         (click)="lang.setLang('fr')"
       >
         FR
@@ -33,13 +34,15 @@
       <!-- EN -->
       <span
         class="cursor-pointer pb-[2px]"
-        [ngClass]="{ 'border-b-2 border-black': lang.currentLang() === 'en' }"
+        [class.border-b-2]="lang.currentLang() === 'en'"
+        [class.border-black]="lang.currentLang() === 'en'"
         (click)="lang.setLang('en')"
       >
         ENG
       </span>
 
     </div>
+
   </div>
 
   <!-- BURGER MOBILE -->
@@ -79,7 +82,9 @@
 
     <span
       class="cursor-pointer pb-[2px]"
-      [ngClass]="{ 'border-b-2 border-black': lang.currentLang() === 'fr' }"
+      [ngClass]="{ 'border-b-2 border-black' : lang.currentLang() === 'fr' }"
+
+      [class.border-black]="lang.currentLang() === 'fr'"
       (click)="lang.setLang('fr')"
     >
       FR
@@ -89,7 +94,8 @@
 
     <span
       class="cursor-pointer pb-[2px]"
-      [ngClass]="{ 'border-b-2 border-black': lang.currentLang() === 'en' }"
+      [class.border-b-2]="lang.currentLang() === 'en'"
+      [class.border-black]="lang.currentLang() === 'en'"
       (click)="lang.setLang('en')"
     >
       ENG
