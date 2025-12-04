@@ -6,11 +6,12 @@ import {
   VeraApiService,
   VeraCheckResult,
 } from '../../services/vera-api.service';
+import { SurveyStatsComponent } from './survey-stats.component'; // ✅ nouveau
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SurveyStatsComponent], // ✅ ajouté ici
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
