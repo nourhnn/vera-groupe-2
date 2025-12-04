@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LangService } from '../../services/lang.service';
+
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { HeroComponent } from '../../sections/hero/hero';
 import { OutilComponent } from '../../sections/outil/outil'; 

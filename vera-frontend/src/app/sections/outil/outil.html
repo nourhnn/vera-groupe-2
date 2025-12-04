@@ -1,54 +1,69 @@
 <section class="bg-[#F5EDE3] px-6 py-12 md:py-20 md:px-16">
-  <div class="max-w-6xl mx-auto md:flex md:items-center md:gap-12">
+  <div class="max-w-6xl mx-auto md:flex md:items-center md:gap-20">
 
-    <!-- COLONNE GAUCHE : TEXTE -->
+    <!-- COLONNE GAUCHE -->
     <div class="md:w-1/2 text-center md:text-left">
 
-      <!-- TITRE -->
-      <h2 class="text-3xl md:text-4xl font-semibold leading-tight mb-6">
-        L’
-        <span class="bg-[#CDE9B8] px-1">outil de confiance</span>
-        <br />
-        pour vérifier les faits
+      <h2 class="text-3xl md:text-5xl font-semibold leading-tight mb-6">
+        {{ t('tools.trustTool1') }}
+        <span class="bg-[#CDE9B8] px-1">
+          {{ t('tools.trustTool2') }}
+        </span><br />
+        {{ t('tools.trustTool3') }}
       </h2>
 
-      <!-- TEXTE -->
       <p class="text-gray-700 text-base md:text-lg mb-6">
-        Un seul numéro (gratuit) pour contrer la désinformation et apaiser le débat public.
-        Egalement disponible en DM Whatsapp et Instagram !
+        {{ t('tools.description') }}
       </p>
 
-      <!-- ICÔNE + TEXTE -->
       <div class="flex justify-center md:justify-start items-center gap-3 mb-8">
-        <img src="assets/images/icone-antenne.png"
-             alt="icone"
-             class="w-6 h-6" />
+        <img src="assets/images/icone-antenne.png" class="w-6 h-6" />
         <span class="text-gray-700 text-sm md:text-base">
-          Accessible sans internet, sur tous les téléphones
+          {{ t('tools.accessibleEverywhere') }}
         </span>
       </div>
 
-      <!-- BOUTONS -->
-      <div class="flex flex-col items-center gap-4 md:flex-row md:items-center md:gap-6">
+      <!-- 🟢 BOUTONS -->
+      <div class="flex flex-col items-center md:items-start gap-4 md:flex-row md:gap-6">
+        
+        <!-- PARLER AVEC VERA -->
         <button
-          class="w-64 md:w-auto px-8 py-3 border border-black rounded-full text-base md:text-lg flex items-center justify-center gap-2 bg-white">
-          Regarder la démo
-          <span>▶</span>
+          class="min-w-[240px] px-8 py-3 rounded-full text-base md:text-lg
+                 bg-black text-white
+                 hover:bg-[#C2E4A1] hover:text-black
+                 transition"
+        >
+          {{ t('tools.talkToVera') }}
         </button>
 
+        <!-- DEMO -->
         <button
-          class="w-64 md:w-auto px-8 py-3 bg-black text-white rounded-full text-base md:text-lg flex items-center justify-center">
-          Parler avec Vera
+          class="
+            min-w-[240px] px-8 py-3 rounded-full text-base md:text-lg
+            flex items-center justify-center gap-2
+            border border-black
+            md:border-0               
+            md:hover:border md:hover:border-black
+            bg-transparent
+            transition
+          "
+        >
+          {{ t('tools.watchDemo') }}
+          <img 
+            src="assets/images/start.png" 
+            alt="start icon" 
+            class="w-4 h-4 md:w-5 md:h-5"
+          />
         </button>
+
       </div>
     </div>
 
-    <!-- COLONNE DROITE : IMAGE TÉLÉPHONES -->
+    <!-- IMAGE -->
     <div class="mt-10 md:mt-0 md:w-1/2 flex justify-center md:justify-end">
       <img
         src="assets/images/telephones.png"
-        alt="Téléphones Vera"
-        class="w-[75%] max-w-[330px] md:w-[380px] lg:w-[460px] object-contain"
+        class="w-[100%] max-w-[500px] md:w-[380px] lg:w-[460px] object-contain"
       />
     </div>
 

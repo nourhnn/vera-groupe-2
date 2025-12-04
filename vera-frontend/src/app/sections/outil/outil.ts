@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LangService } from '../../services/lang.service'; // ✅ IMPORT
 
 @Component({
   selector: 'app-outil',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './outil.html',
   styleUrls: ['./outil.css']
 })
-export class OutilComponent {}
+export class OutilComponent {
+
+  constructor(public lang: LangService) {} // ✅ IMPORTANT
+
+  t(key: string) {
+    return this.lang.t(key);
+  }
+}

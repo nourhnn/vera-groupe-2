@@ -1,21 +1,28 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LangService } from '../../services/lang.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],  // <--- obligatoire pour *ngIf
+  imports: [CommonModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  menuOpen = signal(false);
+  menu = false;
+
+  constructor(public lang: LangService) {}
 
   toggleMenu() {
-    this.menuOpen.update(v => !v);
+    this.menu = !this.menu;
   }
 
   closeMenu() {
-    this.menuOpen.set(false);
+    this.menu = false;
+  }
+
+  menuOpen() {
+    return this.menu;
   }
 }

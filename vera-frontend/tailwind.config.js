@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],   // Police par défaut
+        lastik: ['Lastik', 'sans-serif'],     // Police titres
+      },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0)' },

@@ -1,67 +1,120 @@
-<section class="bg-[#CDE9B8] px-6 py-12">
-  <div class="max-w-[450px] mx-auto">
+<section class="bg-[#CDE9B8] px-6 py-20">
+  <div class="max-w-3xl mx-auto">
 
-    <!-- Comment ça marche -->
-    <p class="text-center text-gray-700 text-sm mb-3">
-      Comment ça marche ?
+    <!-- TITRE -->
+    <p class="text-center text-gray-700 text-sm mb-2">
+      {{ lang.t('comment.howItWorks') }}
     </p>
 
-    <!-- Titre -->
-    <h2 class="text-center text-[26px] font-semibold leading-tight mb-6">
-      Posez une question <br />
-      <span class="bg-white px-2 py-1 rounded">
-        par téléphone, Whatsapp ou Instagram
+    <h2 class="text-center text-[32px] font-lastik mb-20 leading-tight">
+      {{ lang.t('comment.askQuestion') }}
+      <span class="bg-white px-3 py-1">
+        {{ lang.t('comment.byPhoneOrSocial') }}
       </span>
     </h2>
 
-    <!-- Ajoutez Vera -->
-    <p class="text-center text-lg mb-4">Ajoutez Vera</p>
+    <!-- ⚡ DESKTOP VERSION -->
+    <div class="hidden md:grid md:grid-cols-3 items-start gap-10">
 
-    <!-- Boutons -->
-    <div class="flex flex-col items-center gap-4 mb-16">
-      <button class="w-64 px-8 py-3 bg-black text-white rounded-full text-lg">
-        Voir le numéro
-      </button>
+      <!-- 🟩 COLONNE GAUCHE -->
+      <div class="flex flex-col items-center">
 
-      <button class="w-64 px-8 py-3 border border-black bg-[#EFE8D9] rounded-full text-lg">
-        Instagram
-      </button>
-    </div>
+        <img src="assets/images/comment/telephones_2.png" class="w-[260px] mb-10"/>
 
-    <!-- 🔥 Téléphones à gauche / Icônes + Messages à droite -->
-    <div class="flex justify-between items-start gap-6">
+        <p class="text-[26px] font-lastik mb-6">
+          {{ lang.t('comment.addVera') }}
+        </p>
 
-      <!-- Gauche : Téléphones -->
-      <div class="w-1/2 flex justify-center">
-        <img src="assets/images/comment/telephones_2.png"
-             class="w-[200px]"
-             alt="Téléphones">
+        <div class="relative flex flex-col items-center gap-5">
+
+          <img src="assets/images/comment/etincelle.png"
+               class="absolute left-[-90px] top-[90px] w-[100px]"/>
+
+          <button class="w-[260px] py-3 bg-black text-white rounded-full text-[18px]">
+            {{ lang.t('comment.showNumber') }}
+          </button>
+
+          <button class="w-[260px] py-3 bg-[#EFE8D9] border border-black rounded-full text-[18px]">
+            Instagram
+          </button>
+
+        </div>
       </div>
 
-      <!-- Droite : Icône Appel + Messages -->
-      <div class="w-1/2 flex flex-col items-center gap-10">
+      <!-- 🟧 COLONNE CENTRALE -->
+      <div class="flex flex-col items-center gap-20">
+        <img src="assets/images/comment/fleche_1.png" class="w-[160px]"/>
+        <img src="assets/images/comment/fleche_2.png" class="w-[160px]"/>
+      </div>
 
-        <!-- Appeler -->
-        <div class="flex flex-col items-center text-center gap-2">
-          <img src="assets/images/comment/personnage_telephone.png"
-               class="w-[60px]"
-               alt="Appel">
-          <p class="text-[16px] leading-tight">
-            Appelez-la <br />
-            par téléphone
+      <!-- 🟦 COLONNE DROITE -->
+      <div class="flex flex-col items-center gap-16 mt-[20px]">
+
+        <div class="flex flex-col items-center">
+          <img src="assets/images/comment/personnage_telephone.png" class="w-[70px] mb-3"/>
+          <p class="text-[22px] text-center leading-tight font-lastik">
+            {{ lang.t('comment.callHer') }} <br />
+            {{ lang.t('comment.byPhone') }}
           </p>
         </div>
 
-        <!-- Messages -->
-        <div class="flex flex-col items-center text-center gap-2">
-          <img src="assets/images/comment/messages.png"
-               class="w-[120px]"
-               alt="Messages">
-          <p class="text-[16px] leading-tight">
-            Écrivez-lui <br />
-            sur Whatsapp <br />
-            et Instagram
+        <div class="flex flex-col items-center">
+          <img src="assets/images/comment/messages.png" class="w-[150px] mb-3"/>
+          <p class="text-[22px] text-center leading-tight font-lastik">
+            {{ lang.t('comment.writeHer') }} <br />
+            {{ lang.t('comment.onWhatsInstagram') }}
           </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ⭐ MOBILE VERSION -->
+    <div class="flex flex-col md:hidden items-center gap-4">
+
+      <p class="text-[20px] font-lastik text-center">
+        {{ lang.t('comment.addVera') }}
+      </p>
+
+      <div class="relative flex flex-row items-center justify-center gap-3 w-full">
+
+        <img src="assets/images/comment/etincelle.png" class="hidden"/>
+
+        <button class="w-[150px] py-2 bg-black text-white rounded-full text-[12px]">
+          {{ lang.t('comment.showNumber') }}
+        </button>
+
+        <button class="w-[150px] py-2 bg-[#EFE8D9] border border-black rounded-full text-[12px]">
+          Instagram
+        </button>
+
+      </div>
+
+      <div class="flex flex-row justify-center gap-6 mt-10 w-full items-center">
+
+        <img src="assets/images/comment/telephones_2.png" class="w-[190px] mt-4"/>
+
+        <div class="flex flex-col items-start gap-8">
+
+          <div class="flex flex-col items-start">
+            <img src="assets/images/comment/personnage_telephone.png"
+                 class="w-[45px] mb-1"/>
+            <p class="text-[16px] leading-tight font-lastik">
+              {{ lang.t('comment.callHer') }} <br />
+              {{ lang.t('comment.byPhone') }}
+            </p>
+          </div>
+
+          <div class="flex flex-col items-start">
+            <img src="assets/images/comment/messages.png" class="w-[100px] mb-1"/>
+            <p class="text-[16px] leading-tight font-lastik">
+              {{ lang.t('comment.writeHer') }} <br />
+              {{ lang.t('comment.onWhatsInstagram') }}
+            </p>
+          </div>
+
         </div>
 
       </div>
