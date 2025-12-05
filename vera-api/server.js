@@ -1,11 +1,8 @@
-import dotenv from "dotenv";
-dotenv.config();
-
-import app from "./app.js";
-import "./telegram.js"; // lance le bot
+// server.js
+const app = require('./app');
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Vera API running on http://localhost:${PORT}`);
+  console.log(`Vera API listening on http://localhost:${PORT}`);
 });
