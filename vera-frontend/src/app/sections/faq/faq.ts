@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LangService } from '../../services/lang.service';
 
 @Component({
   selector: 'app-faq',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './faq.html',
-  styleUrl: './faq.css',
+  styleUrls: ['./faq.css'],
 })
-export class Faq {
+export class FaqComponent {
+
+  constructor(public lang: LangService) {}
 
 }

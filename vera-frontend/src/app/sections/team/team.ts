@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LangService } from '../../services/lang.service';
 
 @Component({
   selector: 'app-team',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './team.html',
-  styleUrl: './team.css',
+  styleUrls: ['./team.css'],
 })
-export class Team {
-
+export class TeamComponent {
+  constructor(public lang: LangService) {}
 }

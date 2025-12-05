@@ -12,43 +12,46 @@ export interface VeraCheckResult {
   createdAt: string;
 }
 
+const DEFAULT_API_BASE_URL = 'http://localhost:3000/api';
+
+function resolveApiBaseUrl(): string {
+  const candidate =
+    (window as any)?.NG_APP_API_BASE_URL ||
+    (import.meta as any)?.env?.['NG_APP_API_BASE_URL'] ||
+    (import.meta as any)?.env?.['NG_APP_API_URL'];
+
+  const url =
+    typeof candidate === 'string' && candidate.trim().length > 0 ? candidate : DEFAULT_API_BASE_URL;
+  return url.replace(/\/$/, '');
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class VeraApiService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = resolveApiBaseUrl();
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Chat classique
   ask(question: string): Observable<VeraCheckResult> {
     return this.checkQuestion(question, 'chat');
   }
 
-  // 🔹 Méthode générique de check
-  checkQuestion(
-    question: string,
-    source: string = 'chat'
-  ): Observable<VeraCheckResult> {
-    return this.http.post<VeraCheckResult>(`${this.baseUrl}/api/check`, {
+  checkQuestion(question: string, source: string = 'chat'): Observable<VeraCheckResult> {
+    return this.http.post<VeraCheckResult>(`${this.baseUrl}/check`, {
       question,
       source,
     });
   }
 
-  // 🔹 Historique des questions
   getQuestions(): Observable<VeraCheckResult[]> {
-    return this.http.get<VeraCheckResult[]>(`${this.baseUrl}/api/questions`);
+    return this.http.get<VeraCheckResult[]>(`${this.baseUrl}/questions`);
   }
 
-  // 🔹 Login admin
-  loginAdmin(
-    email: string,
-    password: string
-  ): Observable<{ success: boolean; token: string }> {
-    return this.http.post<{ success: boolean; token: string }>(
-      `${this.baseUrl}/api/admin/login`,
-      { email, password }
-    );
+  loginAdmin(email: string, password: string): Observable<{ success: boolean; token: string }> {
+    return this.http.post<{ success: boolean; token: string }>(`${this.baseUrl}/auth/login`, {
+      email,
+      password,
+    });
   }
 }

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { VeraApiService } from '../../services/vera-api.service';
 
 @Component({
   selector: 'app-admin-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './admin-login.html',
   styleUrl: './admin-login.css',
 })
@@ -15,8 +15,13 @@ export class AdminLoginComponent {
   email = '';
   password = '';
   error: string | null = null;
+  showPassword = false;
 
   constructor(private veraApi: VeraApiService, private router: Router) {}
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   onSubmit() {
     this.error = null;

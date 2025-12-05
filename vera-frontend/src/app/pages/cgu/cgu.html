@@ -4,7 +4,7 @@
     <!-- DESKTOP -->
     <div class="hidden md:flex justify-between items-start">
 
-      <!-- LEFT SIDE (LOGO + TEXTE) -->
+      <!-- LEFT SIDE -->
       <div class="w-[40%]">
         <img src="assets/images/logo-vera-blanc.png" class="w-[110px] mb-6" />
 
@@ -23,9 +23,18 @@
           <h3 class="text-[16px] font-semibold mb-4">
             {{ lang.t('footer.product') }}
           </h3>
+
           <ul class="space-y-2 text-[14px]">
-            <li><a routerLink="/chat" class="hover:underline">{{ lang.t('footer.chatbot') }}</a></li>
-            <li><a routerLink="/comment-ca-marche" class="hover:underline">{{ lang.t('nav.howItWorks') }}</a></li>
+            <li>
+              <a routerLink="/chat" class="hover:underline">
+                {{ lang.t('footer.chatbot') }}
+              </a>
+            </li>
+            <li>
+              <a routerLink="/comment-marche" class="hover:underline">
+                {{ lang.t('footer.howItWorks') }}
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -34,9 +43,18 @@
           <h3 class="text-[16px] font-semibold mb-4">
             {{ lang.t('footer.team') }}
           </h3>
+
           <ul class="space-y-2 text-[14px]">
-            <li><a routerLink="/equipe" class="hover:underline">{{ lang.t('nav.meetTeam') }}</a></li>
-            <li><a href="https://vera.org" target="_blank" class="hover:underline">LaReponse.Tech</a></li>
+            <li>
+              <a routerLink="/team" class="hover:underline">
+                {{ lang.t('footer.meetTeam') }}
+              </a>
+            </li>
+            <li>
+              <a href="https://lareponse.tech" target="_blank" class="hover:underline">
+                {{ lang.t('footer.lareponse') }}
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -45,10 +63,11 @@
           <h3 class="text-[16px] font-semibold mb-4">
             {{ lang.t('footer.help') }}
           </h3>
+
           <ul class="space-y-2 text-[14px]">
             <li><a routerLink="/faq" class="hover:underline">FAQ</a></li>
-            <li><a routerLink="/contact" class="hover:underline">{{ lang.t('footer.contact') }}</a></li>
-            <li><a routerLink="/privacy" class="hover:underline">{{ lang.t('footer.privacy') }}</a></li>
+            <li><a href="tel:+33974991295" class="hover:underline">{{ lang.t('footer.contactUs') }}</a></li>
+            <li><a routerLink="/privacy-policy" class="hover:underline">{{ lang.t('footer.privacy') }}</a></li>
             <li><a routerLink="/cgu" class="hover:underline">{{ lang.t('footer.cgu') }}</a></li>
           </ul>
         </div>
@@ -72,15 +91,15 @@
         <h3 class="text-[16px] font-semibold mb-3">{{ lang.t('footer.product') }}</h3>
         <ul class="space-y-2 text-[14px]">
           <li><a routerLink="/chat" class="hover:underline">{{ lang.t('footer.chatbot') }}</a></li>
-          <li><a routerLink="/comment-ca-marche" class="hover:underline">{{ lang.t('nav.howItWorks') }}</a></li>
+          <li><a routerLink="/comment-marche" class="hover:underline">{{ lang.t('footer.howItWorks') }}</a></li>
         </ul>
       </div>
 
       <div>
         <h3 class="text-[16px] font-semibold mb-3">{{ lang.t('footer.team') }}</h3>
         <ul class="space-y-2 text-[14px]">
-          <li><a routerLink="/equipe" class="hover:underline">{{ lang.t('nav.meetTeam') }}</a></li>
-          <li><a href="https://vera.org" target="_blank" class="hover:underline">LaReponse.Tech</a></li>
+          <li><a routerLink="/team" class="hover:underline">{{ lang.t('footer.meetTeam') }}</a></li>
+          <li><a href="https://lareponse.tech" target="_blank" class="hover:underline">{{ lang.t('footer.lareponse') }}</a></li>
         </ul>
       </div>
 
@@ -88,8 +107,8 @@
         <h3 class="text-[16px] font-semibold mb-3">{{ lang.t('footer.help') }}</h3>
         <ul class="space-y-2 text-[14px]">
           <li><a routerLink="/faq" class="hover:underline">FAQ</a></li>
-          <li><a routerLink="/contact" class="hover:underline">{{ lang.t('footer.contact') }}</a></li>
-          <li><a routerLink="/privacy" class="hover:underline">{{ lang.t('footer.privacy') }}</a></li>
+          <li><a href="tel:+33974991295" class="hover:underline">{{ lang.t('footer.contactUs') }}</a></li>
+          <li><a routerLink="/privacy-policy" class="hover:underline">{{ lang.t('footer.privacy') }}</a></li>
           <li><a routerLink="/cgu" class="hover:underline">{{ lang.t('footer.cgu') }}</a></li>
         </ul>
       </div>

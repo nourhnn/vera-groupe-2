@@ -1,0 +1,68 @@
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4ebdc;
+  overflow: hidden;
+  padding: 2rem;
+  color: #000000;
+}
+
+.content {
+  text-align: center;
+  display: grid;
+  gap: 12px;
+}
+
+.content h1 {
+  font-family: 'Lastik', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 80px;
+  margin: 0;
+  line-height: 1;
+}
+
+.content h2 {
+  font-family: 'Lastik', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 32px;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.cta:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+@media (max-width: 767px) {
+  .content h1 {
+    font-size: 48px;
+  }
+
+  .content h2 {
+    font-size: 26px;
+  }
+
+  .cta {
+    width: 100%;
+  }
+}

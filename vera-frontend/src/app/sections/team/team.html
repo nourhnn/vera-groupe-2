@@ -18,26 +18,24 @@
 
     <!-- CONTENU -->
     <div class="mt-10 px-2">
-      <p class="text-[15px] text-black mb-3">Rencontrez l’équipe</p>
+      <p class="text-[15px] text-black mb-3">
+        {{ lang.t('teamSection.meetTeam') }}
+      </p>
 
       <h2 class="text-[28px] font-semibold leading-tight text-black mb-4">
-        Nous sommes l’ONG <br />
-        <span class="underline">LaReponse.Tech</span>
+        {{ lang.t('teamSection.weAre') }} <br />
+        <span class="underline">{{ lang.t('teamSection.orgName') }}</span>
       </h2>
 
       <p class="text-[15px] text-black leading-6 mb-6">
-        LaReponse.tech est un collectif de citoyennes et citoyens de la tech réunissant une expérience significative dans les
-projets à impact social. Nous créons des réponses numériques innovantes face aux enjeux majeurs de notre société, tels
-que la lutte contre la désinformation, la protection de la démocratie et la préservation de la planète. Notre conviction est
-que la technologie, utilisée de manière éclairée, peut devenir un levier puissant pour générer des transformations positives
-et durables.
+        {{ lang.t('teamSection.description') }}
       </p>
 
       <!-- Bouton mobile AVEC cœur img -->
       <button
         class="w-full bg-black text-white text-[17px] py-4 rounded-full flex items-center justify-center gap-3">
 
-        Visiter LaReponse.Tech
+        {{ lang.t('teamSection.visit') }}
 
         <img src="assets/images/team/coeur.png" 
              alt="coeur"
@@ -64,30 +62,35 @@ et durables.
 
     <div class="px-4">
 
-      <p class="text-[18px] text-black mb-4">Rencontrez l’équipe</p>
+      <p class="text-[18px] text-black mb-4">
+        {{ lang.t('teamSection.meetTeam') }}
+      </p>
 
       <h2 class="text-[48px] font-semibold leading-tight text-black mb-8">
-        Nous sommes l’ONG <span class="underline">LaReponse.Tech</span>
+        {{ lang.t('teamSection.weAre') }}
+        <span class="underline">{{ lang.t('teamSection.orgName') }}</span>
       </h2>
 
       <p class="text-[20px] text-black leading-8 mb-8">
-        LaReponse.tech est un collectif de citoyennes et citoyens de la tech réunissant une expérience significative dans les
-projets à impact social. Nous créons des réponses numériques innovantes face aux enjeux majeurs de notre société, tels
-que la lutte contre la désinformation, la protection de la démocratie et la préservation de la planète. Notre conviction est
-que la technologie, utilisée de manière éclairée, peut devenir un levier puissant pour générer des transformations positives
-et durables.
+        {{ lang.t('teamSection.description') }}
       </p>
 
       <!-- Bouton desktop AVEC cœur img -->
       <button
         class="bg-black text-white text-[20px] py-4 px-12 rounded-full flex items-center gap-4">
 
-        Visiter LaReponse.Tech
-
+        {{ lang.t('teamSection.visit') }}
+        <a
+        href="https://vera.org"
+        target="_blank"
+        class="bg-black text-white text-[20px] py-4 px-12 rounded-full flex items-center gap-4"
+      >
         <img src="assets/images/team/coeur.png" 
              alt="coeur"
              class="w-6 h-6 object-contain">
+        </a>
       </button>
+    
 
     </div>
   </div>

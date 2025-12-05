@@ -31,12 +31,11 @@
     
 // ];
 
-
 import { Routes } from '@angular/router';
 import { ChatComponent } from './pages/chat/chat';
 import { DashboardComponent } from './pages/dashboard/dashboard';
 import { AdminLoginComponent } from './pages/admin-login/admin-login';
-import { LandingComponent } from './pages/landing/landing'; 
+import { LandingComponent } from './pages/landing/landing';
 
 export const routes: Routes = [
   {
@@ -52,7 +51,6 @@ export const routes: Routes = [
     path: 'landing',
     component: LandingComponent,
   },
-
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -60,5 +58,38 @@ export const routes: Routes = [
   {
     path: 'admin-login',
     component: AdminLoginComponent,
+  },
+
+  // 📄 Politique de confidentialité
+  {
+    path: 'politique-confidentialite',
+    loadComponent: () =>
+      import('./pages/privacy-policy/privacy-policy').then(
+        (c) => c.PrivacyComponent
+      ),
+  },
+
+  // 📄 CGU
+  {
+    path: 'cgu',
+    loadComponent: () =>
+      import('./pages/cgu/cgu').then(
+        (c) => c.CguComponent
+      ),
+  },
+
+  // 📄 Page 404
+  {
+    path: '404',
+    loadComponent: () =>
+      import('./pages/not-found/not-found').then(
+        (c) => c.NotFoundComponent
+      ),
+  },
+
+  // ❌ Toutes les autres routes → 404
+  {
+    path: '**',
+    redirectTo: '404',
   },
 ];

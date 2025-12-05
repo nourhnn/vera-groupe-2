@@ -10,11 +10,9 @@ import statsRoutes from "./routes/statsRoutes.js";
 
 const app = express();
 
-// 🔧 Middlewares
 app.use(cors());
 app.use(express.json());
 
-// "Base de données" en mémoire pour la démo (tes questions)
 const questionsHistory = [];
 
 // 🔐 Admin fixe pour le projet
@@ -50,7 +48,6 @@ function checkFact(question) {
     };
   }
 
-  // Par défaut
   return {
     isTrue: true,
     reason:
@@ -58,14 +55,11 @@ function checkFact(question) {
   };
 }
 
-/**
- * Génère des tweets moqueurs si l'info est fausse.
- */
 function generateMockTweets(question) {
   return [
-    `😅 On est encore en 2025 et quelqu'un demande: "${question}"...`,
-    `🤔 Un petit tour sur un site fiable aurait évité cette question: "${question}"`,
-    `📉 Niveau fact-check: besoin d'un boost après: "${question}"`,
+    `Encore en 2025 et quelqu'un demande: "${question}"...`,
+    `Un petit tour sur un site fiable aurait évité cette question: "${question}"`,
+    `Niveau fact-check: besoin d'un boost après: "${question}"`,
   ];
 }
 
