@@ -6,7 +6,7 @@
   "scripts": {
     "build": "ng build",
     "start": "ng serve",
-    "dev": "nodemon index.js"
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
