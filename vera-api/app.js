@@ -14,8 +14,14 @@ const app = express();
    🔧 CORS CONFIG (IMPORTANT POUR FRONT + VERCEL + RENDER)
 ------------------------------------------------------ */
 const allowedOrigins = [
-  "http://localhost:4200",                // Angular local
-  "https://vera-groupe-2.vercel.app",     // ⚠️ ton front Vercel
+  "http://localhost:4200",
+
+  // 🌐 Domaine principal Vercel
+  "https://vera-groupe-2.vercel.app",
+
+  // 🌐 Domaines de build Vercel (copie EXACTE depuis ton screenshot)
+  "https://vera-frontend-only-git-main-nours-projects-3122eb4b.vercel.app",
+  "https://vera-frontend-only-3lepye7wh-nours-projects-3122eb4b.vercel.app"
 ];
 
 app.use(
