@@ -24,24 +24,35 @@ const allowedOrigins = [
   "https://vera-frontend-only-3lepye7wh-nours-projects-3122eb4b.vercel.app"
 ];
 
+// 🛡️ CORS
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Autoriser les outils sans origin (Postman / axios server-side)
+    origin: (origin, callback) => {
+      // Requêtes sans origin (Postman, curl…) -> OK
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      // Autoriser localhost pour le dev
+      if (origin === "http://localhost:4200") {
         return callback(null, true);
       }
 
-      console.log("❌ Origine NON AUTORISÉE :", origin);
-      return callback(new Error("CORS not allowed"));
+      // ✅ Autoriser tous les frontends déployés sur Vercel
+      if (origin.endsWith(".vercel.app")) {
+        return callback(null, true);
+      }
+
+      console.warn("[CORS] Origin non autorisée :", origin);
+      return callback(new Error("Not allowed by CORS"));
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
+// Pour les preflight OPTIONS
+app.options("*", cors());
+
+// Middlewares
 app.use(express.json());
 
 /* -----------------------------------------------------
