@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface SingleChoiceEntry {
@@ -7,37 +7,41 @@ export interface SingleChoiceEntry {
   count: number;
 }
 
-export interface ScaleStat {
-  avg: number | null;
-  min: number | null;
-  max: number | null;
-}
-
 export interface DailyCount {
-  date: string; // YYYY-MM-DD
+  date: string;
   count: number;
 }
 
+// ✅ Version alignée avec ce que ton template utilise
 export interface StatsOverview {
+  trueCount: number;
+  falseCount: number;
+  totalCount: number;
+
   totalResponses: number;
-  singleChoice: Record<string, SingleChoiceEntry[]>;
-  scales: Record<string, ScaleStat>;
-  multiChoice: Record<string, Record<string, number>>;
-  dailyCounts?: DailyCount[];
+  dailyCounts: DailyCount[];
+
+  // ex : data.scales['satisfaction_vera'].avg
+  scales: {
+    [key: string]: {
+      avg: number | null;
+      count?: number;
+      [key: string]: any;
+    };
+  };
+
+  // ex : data.singleChoice['age_tranche']
+  singleChoice: {
+    [key: string]: SingleChoiceEntry[];
+  };
+
+  // ex : toEntryList(data.multiChoice['contenu_rs'] || {})
+  multiChoice: {
+    [key: string]: Record<string, number>;
+  };
+
+  // ex : this.overview()?.generatedAt
   generatedAt: string;
-}
-
-const DEFAULT_API_BASE_URL = 'http://localhost:3000/api';
-
-function resolveApiBaseUrl(): string {
-  const env = (import.meta as any).env || {};
-  const candidate = env['NG_APP_API_BASE_URL'] ?? env['NG_APP_API_URL'];
-
-  if (typeof candidate === 'string' && candidate.trim().length > 0) {
-    return candidate.replace(/\/$/, '');
-  }
-
-  return DEFAULT_API_BASE_URL;
 }
 
 @Injectable({
@@ -45,30 +49,36 @@ function resolveApiBaseUrl(): string {
 })
 export class StatsService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = resolveApiBaseUrl();
+
+  // 🔥 Direct Render
+  private readonly baseUrl = 'https://vera-groupe-2.onrender.com/api';
 
   fetchOverview(): Observable<StatsOverview> {
     return this.http.get<StatsOverview>(`${this.baseUrl}/stats/overview`);
   }
 
   listenToStream(): Observable<StatsOverview> {
-    return new Observable<StatsOverview>((observer) => {
+    return new Observable<StatsOverview>((subscriber) => {
       const source = new EventSource(`${this.baseUrl}/stats/stream`);
 
       source.onmessage = (event) => {
         try {
-          const parsed = JSON.parse(event.data);
-          observer.next(parsed);
-        } catch (err) {
-          console.error('Impossible de parser les données de stats', err);
+          const data = JSON.parse(event.data) as StatsOverview;
+          subscriber.next(data);
+        } catch (e) {
+          console.error('[StatsService] erreur parse stream', e);
         }
       };
 
       source.onerror = (err) => {
-        observer.error(err);
+        console.error('[StatsService] stream error', err);
+        source.close();
+        subscriber.error(err);
       };
 
-      return () => source.close();
+      return () => {
+        source.close();
+      };
     });
   }
 }
